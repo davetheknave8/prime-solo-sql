@@ -1,62 +1,44 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
-{\colortbl;\red255\green255\blue255;\red22\green23\blue255;\red0\green0\blue0;\red175\green24\blue28;
-\red176\green122\blue28;\red0\green0\blue0;\red255\green255\blue255;\red89\green134\blue229;\red204\green204\blue202;
-\red204\green204\blue202;\red90\green135\blue230;\red204\green204\blue202;}
-{\*\expandedcolortbl;;\cssrgb\c11765\c23529\c100000;\csgray\c0;\cssrgb\c74902\c16863\c14118;
-\cssrgb\c74902\c54902\c14118;\cssrgb\c0\c1\c1;\cssrgb\c100000\c100000\c100000;\cssrgb\c42144\c60854\c91866;\cssrgb\c83770\c83767\c83038;
-\cssrgb\c83858\c83855\c83021;\cssrgb\c42394\c61144\c92104;\cssrgb\c83681\c83679\c83054;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+1. How do you get all users from Chicago?
+SELECT * FROM “accounts” WHERE “city” LIKE ‘chicago’;
 
-\f0\fs24 \cf0 1. How do you get all users from Chicago?\
-SELECT * FROM \'93accounts\'94 WHERE \'93city\'94 LIKE \'91chicago\'92;\
-\
-\
-2. How do you get all users with usernames that contain the letter a?\
-\pard\pardeftab577\pardirnatural\partightenfactor0
-\cf2 SELECT\cf3  * \cf2 FROM\cf3  \cf4 "accounts"\cf3  \cf2 WHERE\cf3  \cf4 "username"\cf3  \cf2 ILIKE\cf3  \cf5 '%a%'\cf3 ;\
-\
-\pard\pardeftab720\sl360\partightenfactor0
-\cf6 \cb7 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec8 3.\cf6 \cb7 \strokec9  The bank is giving a new customer bonus! How do you update all records with an account balance \cf6 \cb7 \strokec10 of 0.00 and a transactions_attempted of 0? Give them a new account balance of 10.00.\
-UPDATE \'93accounts\'94 SET \'93account_balance\'94 = 10 WHERE \'93account_balance\'94 LIKE 0 .00 AND \'93transactions_completed\'94 LIKE 0;\
-\
-\cf6 \cb7 \strokec11 4.\cf6 \cb7 \strokec10  How do you select all users that have attempted 9 or more transactions?\
-SELECT * FROM \'93accounts\'94 WHERE \'93attempted_transactions\'94 >= 9;\
-\
-\cf6 \cb7 \strokec11 5.\cf6 \cb7 \strokec10  How do you get the username and account balance of the 3 users with the highest balances, sorted highest to lowest balance? NOTE: Research LIMIT\
-SELECT * FROM \'93accounts\'94 ORDER BY \'93account_balance\'94 DESC LIMIT 3;\
-\
-\
-\cf6 \cb7 \strokec11 6.\cf6 \cb7 \strokec10  How do you get the username and account balance of the 3 users with the lowest balances, sorted lowest to highest balance?\
-SELECT \'93username\'94,\'94account_balance\'94 FROM \'93accounts\'94 ORDER BY \'93account_balance\'94 ASC LIMIT 3;\
-\
-\cf6 \cb7 \strokec11 7.\cf6 \cb7 \strokec10  How do you get all users with account balances that are more than $100?\
-SELECT * FROM \'93accounts\'94 WHERE \'93account_balance\'94 > 100;\
-\
-\cf6 \cb7 \strokec11 8.\cf6 \cb7 \strokec10  How do you add a new account?\
-INSERT INTO \'93accounts\'94(username, city, transactions_completed, transactions_attempted, account_balance) VALUES (\'91david\'92, \'91minneapolis\'92, 20, 20, 10000000.97);\
-\
-\cf6 \cb7 \strokec11 9.\cf6 \cb7 \strokec10  The bank is losing money in Miami and Phoenix and needs to unload low transaction customers: How do you delete users that reside in miami OR phoenix and have completed fewer than 5 transactions.\
-\
-DELETE FROM \'93accounts\'94 WHERE \'93transactions_completed\'94 < 5 AND \'93city\'94 LIKE \'91miami\'92 OR \'93transactions_completed\'94 < 5 AND \'93city\'94 LIKE \'91phoenix\'92;\
-\
-STRETCH GOALS\
-\
-1.Anthony moved to Sante Fe.\
-UPDATE \'93accounts\'94 SET \'93city\'94 = \'91Sante Fe\'92;\
-\
-2. Grace closed her account.\
-DELETE FROM \'93accounts\'94 WHERE \'93username\'94 LIKE \'93grace\'94;\
-\
-3. Travis made a withdrawal of $20,000.\
-UPDATE \'93accounts\'94 SET \'93account_balance\'94 = \'93account_balance\'94 - 20000 WHERE \'93username\'94 LIKE \'91travis\'92;\
-\
-4. The bank needs to track last names.\
-ALTER TABLE \'93accounts\'94\
-ADD \'93last_name\'94 varchar(50);\
-\pard\pardeftab720\sl360\partightenfactor0
 
-\f1 \cf6 \cb7 \strokec12 \
-}
+2. How do you get all users with usernames that contain the letter a?
+SELECT * FROM "accounts" WHERE "username" ILIKE '%a%';
+
+3. The bank is giving a new customer bonus! How do you update all records with an account balance of 0.00 and a transactions_attempted of 0? Give them a new account balance of 10.00.
+UPDATE “accounts” SET “account_balance” = 10 WHERE “account_balance” LIKE 0 .00 AND “transactions_completed” LIKE 0;
+
+4. How do you select all users that have attempted 9 or more transactions?
+SELECT * FROM “accounts” WHERE “attempted_transactions” >= 9;
+
+5. How do you get the username and account balance of the 3 users with the highest balances, sorted highest to lowest balance? NOTE: Research LIMIT
+SELECT * FROM “accounts” ORDER BY “account_balance” DESC LIMIT 3;
+
+
+6. How do you get the username and account balance of the 3 users with the lowest balances, sorted lowest to highest balance?
+SELECT “username”,”account_balance” FROM “accounts” ORDER BY “account_balance” ASC LIMIT 3;
+
+7. How do you get all users with account balances that are more than $100?
+SELECT * FROM “accounts” WHERE “account_balance” > 100;
+
+8. How do you add a new account?
+INSERT INTO “accounts”(username, city, transactions_completed, transactions_attempted, account_balance) VALUES (‘david’, ‘minneapolis’, 20, 20, 10000000.97);
+
+9. The bank is losing money in Miami and Phoenix and needs to unload low transaction customers: How do you delete users that reside in miami OR phoenix and have completed fewer than 5 transactions.
+
+DELETE FROM “accounts” WHERE “transactions_completed” < 5 AND “city” LIKE ‘miami’ OR “transactions_completed” < 5 AND “city” LIKE ‘phoenix’;
+
+STRETCH GOALS
+
+1.Anthony moved to Sante Fe.
+UPDATE “accounts” SET “city” = ‘Sante Fe’;
+
+2. Grace closed her account.
+DELETE FROM “accounts” WHERE “username” LIKE “grace”;
+
+3. Travis made a withdrawal of $20,000.
+UPDATE “accounts” SET “account_balance” = “account_balance” - 20000 WHERE “username” LIKE ‘travis’;
+
+4. The bank needs to track last names.
+ALTER TABLE “accounts”
+ADD “last_name” varchar(50);
